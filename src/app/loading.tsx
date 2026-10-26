@@ -1,0 +1,2 @@
+import { Container } from "@/components/ui/elements";
+export default function Loading() { return <Container className="loading-state"><p role="status" className="sr-only">Loading the next page…</p><div aria-hidden="true"><div className="skeleton loading-title" /><div className="skeleton loading-copy" /><div className="project-grid">{[1, 2, 3].map(i => <div key={i} className="skeleton loading-card" />)}</div></div></Container>; }

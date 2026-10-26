@@ -1,0 +1,2 @@
+import { PrimaryButton, SecondaryButton } from "@/components/ui/elements";
+export default function NotFound() { return <div className="not-found"><span className="eyebrow"><span />404 / A little off the map</span><h1>This page is<br />still an idea.</h1><p>We couldn’t find the page you’re looking for. There’s plenty more to explore back at the studio.</p><div className="hero-buttons"><PrimaryButton href="/">Back to home</PrimaryButton><SecondaryButton href="/portfolio">Explore our work</SecondaryButton></div></div>; }

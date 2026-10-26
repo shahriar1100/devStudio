@@ -1,0 +1,12 @@
+export const faqs = [
+  { question: "How much does a website cost?", answer: "Every project has a different scope. We prepare a custom quote after discussing your pages, functionality, content, and integrations. You will know what is included before work begins." },
+  { question: "How long does website development take?", answer: "The timeline depends on the scope, design complexity, content readiness, and feedback. After discovery, we agree on milestones and an estimated schedule with you." },
+  { question: "Will my website be mobile responsive?", answer: "Yes. Responsive layouts are part of our approach. We adapt navigation, content, and interactions for mobile, tablet, and desktop and check representative screen sizes." },
+  { question: "Can you build a complete e-commerce website?", answer: "Yes. We can scope a storefront with product management, cart and checkout, orders, and supported payment integrations. The platform and features are chosen around your business." },
+  { question: "Do you develop WordPress websites?", answer: "Yes. We offer WordPress development and WooCommerce stores, with editing tools and a handover suited to the people who will maintain your content." },
+  { question: "Can I manage my products and orders?", answer: "An e-commerce project can include an administration interface for products, inventory, and orders. We agree on those workflows during planning and explain them at handover." },
+  { question: "Can you redesign my existing website?", answer: "Yes. We first review your content and visitor journeys, then plan the visual refresh, technical changes, and any migration or redirects your existing site needs." },
+  { question: "Do you provide hosting assistance?", answer: "We can help choose a hosting platform, connect your domain, and prepare deployment. Domain, hosting, and other third-party fees are discussed separately in your proposal." },
+  { question: "Can payment gateways be integrated?", answer: "Supported local or international gateways can be integrated based on your platform and provider eligibility. You will need an approved merchant account; provider charges and approval are outside the website scope." },
+  { question: "How can I start a project?", answer: "Use the contact page to tell us about your business, the service you need, and your ideas. We will use those details to discuss the scope and prepare the next steps." },
+];

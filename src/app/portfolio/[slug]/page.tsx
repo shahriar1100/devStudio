@@ -1,0 +1,19 @@
+import { notFound } from "next/navigation";
+import { Check } from "lucide-react";
+import { projects } from "@/data/projects";
+import { Breadcrumb, Container, SectionHeading } from "@/components/ui/elements";
+import { SiteImage } from "@/components/ui/site-image";
+import { ProjectCard } from "@/components/portfolio/project-card";
+import { CTASection } from "@/components/home/sections";
+import { DevicePreview } from "@/components/ui/device-preview";
+import { pageMetadata } from "@/lib/metadata";
+export function generateStaticParams() { return projects.map(project => ({ slug: project.slug })); }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; const project = projects.find(item => item.slug === slug);
+  return project ? pageMetadata(`${project.name} — Concept Project`, project.description, `/portfolio/${slug}`) : {};
+}
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; const project = projects.find(item => item.slug === slug); if (!project) notFound();
+  const related = [...projects.filter(item => item.slug !== slug && item.filter === project.filter), ...projects.filter(item => item.slug !== slug && item.filter !== project.filter)].slice(0, 3);
+  return <><section className="project-detail-hero"><Container><Breadcrumb items={[{ label: "Portfolio", href: "/portfolio" }, { label: project.name }]} /><span className="eyebrow"><span />Concept project · {project.category}</span><h1>{project.title}<span className="blue-dot">.</span></h1><p className="detail-description">{project.description}</p><dl className="project-meta"><div><dt>Project type</dt><dd>Independent design concept</dd></div><div><dt>Category</dt><dd>{project.category}</dd></div><div><dt>Proposed stack</dt><dd>{project.technologies.join(" / ")}</dd></div></dl>{project.liveUrl && <a className="button button-primary mt-8" href={project.liveUrl} target="_blank" rel="noopener noreferrer">View live demo</a>}</Container></section><Container><div className="project-main-image"><SiteImage src={project.image} alt={project.imageAlt} sizes="90vw" priority /></div><p className="image-disclosure">Concept project, not a commissioned client engagement. This stock photograph is a temporary visual placeholder, not a screenshot of a completed website.</p></Container><section className="section"><Container className="detail-grid"><div className="detail-prose"><h2>The objective</h2><p>{project.objective}</p><h2>The design approach</h2><p>{project.approach}</p><h2>Designed for real life</h2><p>The intended layout adapts from a wide desktop to a compact mobile screen. Clear navigation, comfortable touch targets, and readable content guide the responsive direction. These are proposed features for the concept; no live application or business results are claimed.</p></div><aside className="detail-panel"><h2>Concept features</h2><ul className="check-list">{project.features.map(feature => <li key={feature}><Check size={16} />{feature}</li>)}</ul><h2 className="mt-8">Proposed technology</h2><div className="tags">{project.technologies.map(tech => <span key={tech}>{tech}</span>)}</div></aside></Container></section><section className="section showcase-section"><Container><SectionHeading centered eyebrow="Responsive thinking" title="Made to adapt." description="Explore the visual at different frame sizes. A simple illustration of responsive framing, using the same stock photograph." /><DevicePreview src={project.image} alt={project.imageAlt} /></Container></section><section className="section"><Container><SectionHeading eyebrow="Keep exploring" title="More possibilities." /><div className="project-grid">{related.map(item => <ProjectCard key={item.slug} project={item} />)}</div></Container></section><CTASection /></>;
+}
