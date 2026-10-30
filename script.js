@@ -1,5 +1,5 @@
-const projects = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
-const portfolioSettings = window.PORTFOLIO_SETTINGS || {};
+let projects = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
+let portfolioSettings = window.PORTFOLIO_SETTINGS || {};
 const track = document.querySelector(".work-track");
 const dots = document.querySelector(".slider-dots");
 const prevButton = document.querySelector(".slider-prev");
@@ -9,9 +9,11 @@ let autoplayTimer;
 let dragStartX = null;
 let dragging = false;
 
-document.querySelector("#works-label").textContent = portfolioSettings.sectionLabel || "Selected projects";
-document.querySelector("#works-title").textContent = portfolioSettings.sectionTitle || "My recent work";
-document.querySelector("#works-description").textContent = portfolioSettings.sectionDescription || "A rotating collection of visual design and product work.";
+function applyPortfolioSettings() {
+  document.querySelector("#works-label").textContent = portfolioSettings.sectionLabel || "Selected projects";
+  document.querySelector("#works-title").textContent = portfolioSettings.sectionTitle || "My recent work";
+  document.querySelector("#works-description").textContent = portfolioSettings.sectionDescription || "A rotating collection of visual design and product work.";
+}
 
 function relativePosition(index) {
   const total = projects.length;
@@ -71,33 +73,66 @@ function closePreview() {
   restartAutoplay();
 }
 
-projects.forEach((project, index) => {
-  const card = document.createElement("article");
-  card.className = "project-card";
-  card.innerHTML = `
-    <img src="${project.image}" alt="${project.alt}" />
-    <div class="project-meta">
-      <div><strong>${project.title}</strong><span>${project.category}</span></div>
-      <span class="project-preview">Preview ↗</span>
-    </div>`;
-  card.addEventListener("click", () => {
-    if (dragging) return;
-    if (index === activeIndex) openPreview(index);
-    else goTo(index);
-  });
-  card.addEventListener("keydown", event => {
-    if (event.key === "ArrowLeft") goTo(activeIndex - 1);
-    if (event.key === "ArrowRight") goTo(activeIndex + 1);
-    if ((event.key === "Enter" || event.key === " ") && index === activeIndex) openPreview(index);
-  });
-  track.appendChild(card);
+function renderProjects() {
+  track.innerHTML = "";
+  dots.innerHTML = "";
+  activeIndex = 0;
+  projects.forEach((project, index) => {
+    const card = document.createElement("article");
+    card.className = "project-card";
+    const image = document.createElement("img");
+    image.src = project.image;
+    image.alt = project.alt || project.title;
+    const meta = document.createElement("div");
+    meta.className = "project-meta";
+    const copy = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = project.title;
+    const category = document.createElement("span");
+    category.textContent = project.category;
+    const preview = document.createElement("span");
+    preview.className = "project-preview";
+    preview.textContent = "Preview ↗";
+    copy.append(title, category);
+    meta.append(copy, preview);
+    card.append(image, meta);
+    card.addEventListener("click", () => {
+      if (dragging) return;
+      if (index === activeIndex) openPreview(index);
+      else goTo(index);
+    });
+    card.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") goTo(activeIndex - 1);
+      if (event.key === "ArrowRight") goTo(activeIndex + 1);
+      if ((event.key === "Enter" || event.key === " ") && index === activeIndex) openPreview(index);
+    });
+    track.appendChild(card);
 
-  const dot = document.createElement("button");
-  dot.type = "button";
-  dot.setAttribute("aria-label", `Show ${project.title}`);
-  dot.addEventListener("click", () => goTo(index));
-  dots.appendChild(dot);
-});
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show ${project.title}`);
+    dot.addEventListener("click", () => goTo(index));
+    dots.appendChild(dot);
+  });
+  updateSlider();
+  restartAutoplay();
+}
+
+async function loadPortfolioContent() {
+  try {
+    const response = await fetch("/api/projects", { cache: "no-store" });
+    if (!response.ok) throw new Error("Dynamic portfolio is unavailable.");
+    const data = await response.json();
+    if (data.content?.projects?.length) {
+      projects = data.content.projects;
+      portfolioSettings = data.content.settings || portfolioSettings;
+    }
+  } catch {
+    // Keep the bundled demo content when storage has not been configured yet.
+  }
+  applyPortfolioSettings();
+  renderProjects();
+}
 
 prevButton?.addEventListener("click", () => goTo(activeIndex - 1));
 nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
@@ -137,8 +172,7 @@ previewDialog?.addEventListener("cancel", event => {
   event.preventDefault();
   closePreview();
 });
-updateSlider();
-restartAutoplay();
+loadPortfolioContent();
 
 document.querySelector(".work-stage")?.addEventListener("mouseenter", () => window.clearInterval(autoplayTimer));
 document.querySelector(".work-stage")?.addEventListener("mouseleave", restartAutoplay);

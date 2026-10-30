@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#090b3d" />
+    <title>Portfolio Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="assets/js/projects.js" defer></script>
+    <script src="dashboard.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard-shell">
+      <section class="login-panel" id="login-panel">
+        <a class="brand" href="/"><span>S</span> Shahriar.</a>
+        <div class="login-card">
+          <p class="eyebrow">Private workspace</p>
+          <h1>Portfolio dashboard</h1>
+          <p>Sign in with your admin password to manage the My Work section.</p>
+          <form id="login-form">
+            <label for="admin-password">Admin password</label>
+            <input id="admin-password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+            <button type="submit">Open dashboard <span>→</span></button>
+            <p class="status-message" id="login-status" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="admin-panel" id="admin-panel" hidden>
+        <header class="admin-header">
+          <div><p class="eyebrow">Content manager</p><h1>My Work dashboard</h1></div>
+          <div class="header-actions"><a href="/" target="_blank">View website ↗</a><button class="quiet-button" id="logout-button" type="button">Log out</button></div>
+        </header>
+
+        <div class="settings-card">
+          <div class="card-heading"><div><span>01</span><h2>Section content</h2></div><p>Change the heading and small text shown above your projects.</p></div>
+          <div class="settings-grid">
+            <label>Small label<input id="section-label" maxlength="80" /></label>
+            <label>Section title<input id="section-title" maxlength="100" /></label>
+            <label class="wide">Small description<textarea id="section-description" maxlength="240" rows="3"></textarea></label>
+          </div>
+        </div>
+
+        <div class="projects-section">
+          <div class="card-heading"><div><span>02</span><h2>Work items</h2></div><button class="add-button" id="add-project" type="button">+ Add project</button></div>
+          <div class="project-list" id="project-list"></div>
+        </div>
+
+        <div class="save-bar">
+          <p id="save-status" role="status">Changes are not published until you save.</p>
+          <button class="save-button" id="save-content" type="button">Save & publish <span>↗</span></button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+

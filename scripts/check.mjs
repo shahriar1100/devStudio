@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from "node:fs";
 
-const required = ["index.html", "styles.css", "script.js", "assets/js/projects.js", "assets/images/contact/contact-illustration.svg"];
+const required = [
+  "index.html", "styles.css", "script.js",
+  "dashboard.html", "dashboard.css", "dashboard.js",
+  "api/auth.js", "api/projects.js", "api/upload.js", "server/admin.js",
+  "assets/js/projects.js", "assets/images/contact/contact-illustration.svg"
+];
 const missing = required.filter(file => !existsSync(file));
 if (missing.length) throw new Error(`Missing required files: ${missing.join(", ")}`);
 

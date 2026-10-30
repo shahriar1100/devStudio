@@ -7,7 +7,7 @@ const output = join(root, "dist");
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 
-for (const file of ["index.html", "styles.css", "script.js"]) {
+for (const file of ["index.html", "styles.css", "script.js", "dashboard.html", "dashboard.css", "dashboard.js"]) {
   cpSync(join(root, file), join(output, file));
 }
 
