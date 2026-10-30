@@ -1,10 +1,17 @@
 const projects = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
+const portfolioSettings = window.PORTFOLIO_SETTINGS || {};
 const track = document.querySelector(".work-track");
 const dots = document.querySelector(".slider-dots");
 const prevButton = document.querySelector(".slider-prev");
 const nextButton = document.querySelector(".slider-next");
 let activeIndex = 0;
 let autoplayTimer;
+let dragStartX = null;
+let dragging = false;
+
+document.querySelector("#works-label").textContent = portfolioSettings.sectionLabel || "Selected projects";
+document.querySelector("#works-title").textContent = portfolioSettings.sectionTitle || "My recent work";
+document.querySelector("#works-description").textContent = portfolioSettings.sectionDescription || "A rotating collection of visual design and product work.";
 
 function relativePosition(index) {
   const total = projects.length;
@@ -39,6 +46,31 @@ function restartAutoplay() {
   autoplayTimer = window.setInterval(() => goTo(activeIndex + 1), 4500);
 }
 
+const previewDialog = document.querySelector(".project-dialog");
+const previewImage = previewDialog?.querySelector(".dialog-media img");
+const previewTitle = previewDialog?.querySelector("#preview-title");
+const previewCategory = previewDialog?.querySelector(".preview-category");
+const previewDescription = previewDialog?.querySelector(".preview-description");
+const previewLink = previewDialog?.querySelector(".preview-link");
+
+function openPreview(index) {
+  const project = projects[index];
+  if (!project || !previewDialog) return;
+  previewImage.src = project.image;
+  previewImage.alt = project.alt;
+  previewTitle.textContent = project.title;
+  previewCategory.textContent = project.category;
+  previewDescription.textContent = project.description;
+  previewLink.href = project.link;
+  previewDialog.showModal();
+  window.clearInterval(autoplayTimer);
+}
+
+function closePreview() {
+  previewDialog?.close();
+  restartAutoplay();
+}
+
 projects.forEach((project, index) => {
   const card = document.createElement("article");
   card.className = "project-card";
@@ -46,12 +78,17 @@ projects.forEach((project, index) => {
     <img src="${project.image}" alt="${project.alt}" />
     <div class="project-meta">
       <div><strong>${project.title}</strong><span>${project.category}</span></div>
-      <span class="project-number">${String(index + 1).padStart(2, "0")}</span>
+      <span class="project-preview">Preview ↗</span>
     </div>`;
-  card.addEventListener("click", () => goTo(index));
+  card.addEventListener("click", () => {
+    if (dragging) return;
+    if (index === activeIndex) openPreview(index);
+    else goTo(index);
+  });
   card.addEventListener("keydown", event => {
     if (event.key === "ArrowLeft") goTo(activeIndex - 1);
     if (event.key === "ArrowRight") goTo(activeIndex + 1);
+    if ((event.key === "Enter" || event.key === " ") && index === activeIndex) openPreview(index);
   });
   track.appendChild(card);
 
@@ -64,6 +101,42 @@ projects.forEach((project, index) => {
 
 prevButton?.addEventListener("click", () => goTo(activeIndex - 1));
 nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
+
+track?.addEventListener("pointerdown", event => {
+  dragStartX = event.clientX;
+  dragging = false;
+  track.classList.add("dragging");
+  track.setPointerCapture?.(event.pointerId);
+  window.clearInterval(autoplayTimer);
+});
+track?.addEventListener("pointermove", event => {
+  if (dragStartX === null) return;
+  if (Math.abs(event.clientX - dragStartX) > 8) dragging = true;
+});
+track?.addEventListener("pointerup", event => {
+  if (dragStartX === null) return;
+  const distance = event.clientX - dragStartX;
+  track.classList.remove("dragging");
+  dragStartX = null;
+  if (Math.abs(distance) > 55) goTo(activeIndex + (distance < 0 ? 1 : -1));
+  else restartAutoplay();
+  window.setTimeout(() => { dragging = false; }, 0);
+});
+track?.addEventListener("pointercancel", () => {
+  dragStartX = null;
+  dragging = false;
+  track.classList.remove("dragging");
+  restartAutoplay();
+});
+
+previewDialog?.querySelector(".dialog-close")?.addEventListener("click", closePreview);
+previewDialog?.addEventListener("click", event => {
+  if (event.target === previewDialog) closePreview();
+});
+previewDialog?.addEventListener("cancel", event => {
+  event.preventDefault();
+  closePreview();
+});
 updateSlider();
 restartAutoplay();
 
@@ -88,4 +161,3 @@ form?.addEventListener("submit", () => {
   const note = form.querySelector(".form-note");
   note.textContent = "Opening your email app…";
 });
-

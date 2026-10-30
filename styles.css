@@ -107,7 +107,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .section-heading>p:last-child { margin: 10px 0 0; color: var(--muted); }
 .work-stage { position: relative; width: min(1000px, 100%); height: 390px; margin: 58px auto 0; display: grid; place-items: center; }
 .work-orbit { position: absolute; width: 116%; height: 112%; border: 1px solid rgba(58, 80, 243, .58); border-radius: 50%; box-shadow: 0 0 0 8px rgba(44, 57, 185, .08), 0 0 0 18px rgba(44, 57, 185, .06), inset 0 0 50px rgba(79, 98, 255, .08); transform: rotate(4deg); }
-.work-track { position: relative; width: 100%; height: 100%; perspective: 1200px; }
+.work-track { position: relative; width: 100%; height: 100%; perspective: 1200px; cursor: grab; touch-action: pan-y; user-select: none; }
+.work-track.dragging { cursor: grabbing; }
 .project-card {
   position: absolute;
   top: 50%; left: 50%;
@@ -126,7 +127,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-meta { position: absolute; right: 0; bottom: 0; left: 0; min-height: 58px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: rgba(27, 28, 75, .82); backdrop-filter: blur(12px); }
 .project-meta strong { display: block; font-size: 15px; }
 .project-meta span { color: #b9bedb; font-size: 11px; }
-.project-number { color: #828bca !important; font-size: 12px !important; font-weight: 800; }
+.project-preview { color: #fff !important; font-size: 11px !important; font-weight: 800; white-space: nowrap; }
 .project-card[data-position="0"] { z-index: 4; opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .project-card[data-position="-1"] { z-index: 2; opacity: .82; filter: saturate(.6); transform: translate(-98%, -50%) scale(.82) rotateY(8deg); }
 .project-card[data-position="1"] { z-index: 2; opacity: .82; filter: saturate(.6); transform: translate(-2%, -50%) scale(.82) rotateY(-8deg); }
@@ -138,6 +139,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .slider-dots { position: relative; z-index: 5; display: flex; justify-content: center; gap: 7px; }
 .slider-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 10px; background: #575d8e; cursor: pointer; transition: width .25s, background .25s; }
 .slider-dots button.active { width: 24px; background: #bd62da; }
+
+.project-dialog { width: min(1080px, calc(100% - 32px)); max-height: calc(100vh - 32px); padding: 0; overflow: hidden auto; border: 1px solid rgba(255,255,255,.16); border-radius: 24px; color: #fff; background: #11134f; box-shadow: 0 45px 120px rgba(0,0,0,.65); }
+.project-dialog::backdrop { background: rgba(3,4,28,.82); backdrop-filter: blur(12px); }
+.dialog-close { position: absolute; z-index: 4; top: 16px; right: 16px; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: #fff; background: rgba(8,9,45,.72); font-size: 25px; line-height: 1; cursor: pointer; backdrop-filter: blur(10px); }
+.dialog-media { aspect-ratio: 16 / 9; overflow: hidden; background: #090b35; }
+.dialog-media img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top; }
+.dialog-copy { padding: 30px 34px 34px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px 36px; }
+.dialog-copy .eyebrow { grid-column: 1; margin: 0; }
+.dialog-copy h2 { grid-column: 1; margin: 0; font-size: clamp(28px,4vw,45px); letter-spacing: -.04em; }
+.preview-description { grid-column: 1; max-width: 720px; margin: 5px 0 0; color: #bec3e0; }
+.preview-link { grid-column: 2; grid-row: 1 / span 3; }
 
 .contact-section { position: relative; min-height: 720px; padding: 150px 24px 170px; background: linear-gradient(180deg, #090a40, #080937); }
 .contact-glow { position: absolute; top: 20%; left: 50%; width: 620px; height: 420px; border-radius: 50%; background: rgba(38, 45, 145, .36); filter: blur(80px); transform: translateX(-50%); }
@@ -186,6 +198,8 @@ footer>p { margin: 0; color: #9ea3ca; font-size: 11px; }
   .slider-prev { left: calc(50% - 55px); }
   .slider-next { right: calc(50% - 55px); }
   .slider-dots { margin-top: 28px; }
+  .dialog-copy { grid-template-columns: 1fr; padding: 24px; }
+  .preview-link { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 12px; }
   .contact-shell { padding: 110px 30px 38px; grid-template-columns: 1fr; gap: 45px; }
   .contact-illustration { top: -135px; left: 50%; width: 210px; transform: translateX(-50%); }
 }
