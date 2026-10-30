@@ -138,22 +138,28 @@ prevButton?.addEventListener("click", () => goTo(activeIndex - 1));
 nextButton?.addEventListener("click", () => goTo(activeIndex + 1));
 
 track?.addEventListener("pointerdown", event => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
   dragStartX = event.clientX;
   dragging = false;
   track.classList.add("dragging");
+  track.style.setProperty("--drag-x", "0px");
   track.setPointerCapture?.(event.pointerId);
   window.clearInterval(autoplayTimer);
 });
 track?.addEventListener("pointermove", event => {
   if (dragStartX === null) return;
-  if (Math.abs(event.clientX - dragStartX) > 8) dragging = true;
+  const distance = event.clientX - dragStartX;
+  if (Math.abs(distance) > 5) dragging = true;
+  const resistedDistance = Math.max(-150, Math.min(150, distance * 0.72));
+  track.style.setProperty("--drag-x", `${resistedDistance}px`);
 });
 track?.addEventListener("pointerup", event => {
   if (dragStartX === null) return;
   const distance = event.clientX - dragStartX;
   track.classList.remove("dragging");
+  track.style.setProperty("--drag-x", "0px");
   dragStartX = null;
-  if (Math.abs(distance) > 55) goTo(activeIndex + (distance < 0 ? 1 : -1));
+  if (Math.abs(distance) > 45) goTo(activeIndex + (distance < 0 ? 1 : -1));
   else restartAutoplay();
   window.setTimeout(() => { dragging = false; }, 0);
 });
@@ -161,6 +167,7 @@ track?.addEventListener("pointercancel", () => {
   dragStartX = null;
   dragging = false;
   track.classList.remove("dragging");
+  track.style.setProperty("--drag-x", "0px");
   restartAutoplay();
 });
 
