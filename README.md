@@ -26,6 +26,8 @@ See `assets/README.md`. Project content and image paths live in `assets/js/proje
 
 The production dashboard is available at `/dashboard`. It can edit the My Work heading, small text, projects, images, ordering and external links.
 
+For initial setup, the temporary fallback password is `DevStudio@2026`. Setting `ADMIN_PASSWORD` overrides it and is strongly recommended before making the site public.
+
 The dashboard uses Vercel Functions and a public Vercel Blob store:
 
 1. In the Vercel project, open **Storage** and create a **Blob** store with **Public** access. Connect it to Production; Vercel adds `BLOB_READ_WRITE_TOKEN` automatically.

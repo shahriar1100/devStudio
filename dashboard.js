@@ -68,13 +68,15 @@ function collectSettings() {
 }
 
 async function openDashboard() {
-  await api("/api/auth", { method: "POST" });
+  const auth = await api("/api/auth", { method: "POST" });
   const response = await api("/api/projects");
   if (response.content?.projects?.length) content = response.content;
   loginPanel.hidden = true;
   adminPanel.hidden = false;
   setSettingsFields();
   renderProjects();
+  if (auth.storage !== "ready") saveStatus.textContent = "Dashboard is open. Connect Vercel Blob before saving or uploading images.";
+  else if (auth.usingDefaultPassword) saveStatus.textContent = "Default password is active. Set ADMIN_PASSWORD later for stronger security.";
 }
 
 loginForm.addEventListener("submit", async event => {
@@ -180,4 +182,3 @@ document.querySelector("#logout-button").addEventListener("click", () => {
 });
 
 if (adminPassword) openDashboard().catch(() => sessionStorage.removeItem("portfolioAdminPassword"));
-
