@@ -9,7 +9,8 @@ export const site = {
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, ""),
 };
 export const navigation = [
-  { href: "/", label: "Home" }, { href: "/about", label: "About" },
-  { href: "/services", label: "Services" }, { href: "/portfolio", label: "Portfolio" },
-  { href: "/pricing", label: "Pricing" }, { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/portfolio", label: "Work" },
+  { href: "/contact", label: "Contact" },
 ];

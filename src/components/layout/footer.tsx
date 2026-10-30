@@ -1,8 +1,20 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Brand, Container } from "@/components/ui/elements";
-import { navigation, site } from "@/config/site";
-import { services } from "@/data/services";
+
 export function Footer() {
-  return <footer className="footer"><Container><div className="footer-top"><div className="footer-brand"><Brand /><p>We build your ideas.<br />And the possibilities that come next.</p><span className="location-tag"><span />Based in Bangladesh. Built for the world.</span></div><div><h2>Explore</h2>{navigation.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div><div><h2>What we do</h2>{services.map(service => <Link key={service.slug} href={`/services/${service.slug}`}>{service.shortTitle}</Link>)}</div><div><h2>Let’s connect</h2><Link className="footer-contact" href="/contact">Have a project in mind?<ArrowUpRight size={16} /></Link>{site.email && <a href={`mailto:${site.email}`}>Email us <ArrowUpRight size={14} /></a>}{site.facebook && <a href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook <ArrowUpRight size={14} /></a>}{site.whatsapp && <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight size={14} /></a>}<p>Good things start<br />with a conversation.</p></div></div><div className="footer-bottom"><p>© {new Date().getFullYear()} Dev Studio. All rights reserved.</p><div><Link href="/privacy-policy">Privacy policy</Link><Link href="/terms">Terms & conditions</Link></div><span>Made with purpose.</span></div></Container></footer>;
+  return (
+    <footer className="footer compact-footer">
+      <Container>
+        <div className="compact-footer-main">
+          <div><Brand /><p>Clean websites built to help your business sell.</p></div>
+          <Link className="footer-contact" href="/contact?service=Landing%20Page">Start a project <ArrowUpRight size={16} /></Link>
+        </div>
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} Dev Studio. All rights reserved.</p>
+          <div><Link href="/privacy-policy">Privacy</Link><Link href="/terms">Terms</Link></div>
+        </div>
+      </Container>
+    </footer>
+  );
 }

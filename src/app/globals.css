@@ -574,3 +574,91 @@ svg { flex-shrink:0; }
   .marquee-track { width:auto; } .marquee-group { flex-wrap:wrap; gap:18px 30px; padding:0; justify-content:center; }
   .marquee-group[aria-hidden=true] { display:none; } .marquee { mask-image:none; }
 }
+
+/* Focused homepage */
+.sales-hero { padding:72px 0 58px; overflow:hidden; }
+.sales-hero-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:center; }
+.sales-hero-copy { max-width:610px; }
+.offer-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid #2563eb35; border-radius:999px; background:#2563eb0d; color:var(--blue-light); font-size:var(--text-small); font-weight:650; margin-bottom:24px; }
+.sales-hero h1 { max-width:650px; font-size:clamp(50px,5.4vw,78px); line-height:.98; letter-spacing:-4px; font-weight:550; }
+.sales-hero h1 span { color:var(--blue-light); }
+.sales-hero-copy>p { max-width:570px; color:var(--muted); font-size:var(--text-lead); line-height:1.7; margin-top:25px; }
+.hero-price { display:flex; align-items:center; gap:16px; margin-top:28px; }
+.hero-price strong { font-family:var(--font-space),Arial,sans-serif; font-size:34px; line-height:1; letter-spacing:-1px; }
+.hero-price span { max-width:150px; color:var(--muted); font-size:var(--text-small); line-height:1.4; }
+.sales-hero .hero-buttons { display:flex; align-items:center; gap:24px; margin-top:25px; }
+.plain-link { display:inline-flex; align-items:center; gap:7px; font-size:var(--text-ui); font-weight:600; }
+.plain-link:hover { color:var(--blue-light); }
+.sales-trust { display:flex; flex-wrap:wrap; gap:12px 20px; margin-top:26px; color:var(--muted); font-size:var(--text-small); }
+.sales-trust span { display:flex; align-items:center; gap:6px; }
+.sales-trust svg { color:var(--blue-light); }
+.sales-hero-visual { position:relative; min-width:0; }
+.sales-hero-visual>.site-image { position:relative; width:100%; aspect-ratio:1.5; overflow:hidden; border-radius:24px; background:#071637; box-shadow:0 32px 80px #0c2d752d; }
+.sales-hero-visual>.site-image img { object-fit:cover; }
+.visual-badge { position:absolute; left:-18px; bottom:28px; display:flex; align-items:center; gap:8px; padding:12px 15px; border:1px solid var(--line); border-radius:10px; background:var(--card); box-shadow:var(--shadow); font-size:var(--text-small); font-weight:600; }
+.visual-badge span { color:#22c55e; }
+.mini-benefits { border-block:1px solid var(--line); background:var(--surface); }
+.mini-benefits>.container { display:grid; grid-template-columns:repeat(4,1fr); }
+.mini-benefits article { display:flex; gap:14px; padding:28px 24px; border-right:1px solid var(--line); }
+.mini-benefits article:first-child { padding-left:0; }
+.mini-benefits article:last-child { border-right:0; }
+.mini-benefits svg { color:var(--blue-light); margin-top:3px; }
+.mini-benefits h2 { font-size:16px; font-weight:650; }
+.mini-benefits p { margin-top:3px; color:var(--muted); font-size:var(--text-small); line-height:1.55; }
+.simple-offer { padding:96px 0; }
+.simple-offer-grid { display:grid; grid-template-columns:1.1fr .75fr; gap:100px; align-items:center; }
+.simple-offer .section-heading { margin-bottom:24px; }
+.offer-list { display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; padding:0; margin:0; list-style:none; }
+.offer-list li { display:flex; align-items:center; gap:9px; color:var(--muted); }
+.offer-list svg { color:var(--blue-light); }
+.offer-card { position:relative; padding:38px; border:1px solid #356ee85c; border-radius:18px; color:#fff; background:linear-gradient(145deg,#0b1833,#122a59); box-shadow:0 30px 70px #102c6f35; overflow:hidden; }
+.offer-card::after { content:""; position:absolute; width:220px; height:220px; right:-100px; top:-110px; border-radius:50%; background:#2563eb66; filter:blur(5px); }
+.offer-card>span { position:relative; z-index:1; color:#8ab4ff; font-size:var(--text-caption); font-weight:700; letter-spacing:1.6px; }
+.offer-card-price { position:relative; z-index:1; margin-top:12px; font-family:var(--font-space),Arial,sans-serif; font-size:58px; line-height:1; letter-spacing:-2px; }
+.offer-card p { position:relative; z-index:1; color:#becbe4; margin:18px 0 25px; line-height:1.6; }
+.offer-card .button { position:relative; z-index:1; width:100%; justify-content:space-between; }
+.offer-card small { position:relative; z-index:1; display:block; margin-top:16px; color:#91a1be; line-height:1.5; }
+.short-cta { padding:60px 0; background:var(--surface); border-top:1px solid var(--line); }
+.short-cta>.container { display:flex; align-items:center; justify-content:space-between; gap:30px; }
+.short-cta span { color:var(--blue-light); font-size:var(--text-small); font-weight:650; }
+.short-cta h2 { margin-top:5px; font-size:clamp(28px,3vw,42px); letter-spacing:-1.5px; }
+.compact-footer { padding-top:52px; }
+.compact-footer-main { display:flex; align-items:center; justify-content:space-between; gap:30px; padding-bottom:42px; }
+.compact-footer-main p { color:var(--muted); margin-top:12px; }
+
+@media(max-width:1023px) {
+  .sales-hero-grid { gap:32px; }
+  .sales-hero h1 { font-size:56px; }
+  .sales-hero .hero-buttons { align-items:flex-start; flex-direction:column; gap:16px; }
+  .mini-benefits>.container { grid-template-columns:1fr 1fr; }
+  .mini-benefits article:nth-child(2) { border-right:0; }
+  .mini-benefits article:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+  .mini-benefits article:nth-child(3) { padding-left:0; }
+  .simple-offer-grid { gap:50px; }
+}
+@media(max-width:767px) {
+  .sales-hero { padding:46px 0 42px; }
+  .sales-hero-grid { grid-template-columns:1fr; gap:40px; }
+  .sales-hero h1 { font-size:clamp(46px,13vw,64px); letter-spacing:-3px; }
+  .sales-hero-copy>p { margin-top:20px; }
+  .sales-hero .hero-buttons { align-items:stretch; }
+  .sales-hero .hero-buttons .button { width:100%; justify-content:space-between; }
+  .plain-link { justify-content:center; }
+  .visual-badge { left:12px; bottom:12px; }
+  .simple-offer { padding:70px 0; }
+  .simple-offer-grid { grid-template-columns:1fr; gap:42px; }
+  .short-cta>.container,.compact-footer-main { align-items:flex-start; flex-direction:column; }
+  .short-cta .button { width:100%; justify-content:space-between; }
+}
+@media(max-width:479px) {
+  .hero-price { align-items:flex-start; flex-direction:column; gap:8px; }
+  .hero-price span { max-width:none; }
+  .sales-trust { flex-direction:column; }
+  .mini-benefits>.container { grid-template-columns:1fr; }
+  .mini-benefits article,.mini-benefits article:first-child,.mini-benefits article:nth-child(3) { padding:22px 0; border-right:0; border-bottom:1px solid var(--line); }
+  .mini-benefits article:last-child { border-bottom:0; }
+  .offer-list { grid-template-columns:1fr; }
+  .offer-card { padding:30px 24px; }
+  .offer-card-price { font-size:48px; }
+  .sales-hero-visual>.site-image { border-radius:16px; }
+}

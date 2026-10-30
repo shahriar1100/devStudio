@@ -1,7 +1,38 @@
-import { ArrowDown, ArrowUpRight, Check, Code2, LockKeyhole } from "lucide-react";
-import { Container, PrimaryButton, SecondaryButton } from "@/components/ui/elements";
+import { ArrowUpRight, Check, Sparkles } from "lucide-react";
+import { Container, PrimaryButton } from "@/components/ui/elements";
 import { SiteImage } from "@/components/ui/site-image";
-import { siteImages } from "@/data/images";
+
 export function Hero() {
-  return <section className="hero"><Container><div className="hero-grid"><div className="hero-copy"><span className="hero-kicker"><span />Independent digital studio · Bangladesh & beyond</span><h1><span>We build</span><span className="gradient-text">websites</span><span>that grow your</span><span>business<span className="blue-dot">.</span></span></h1><p>From stunning landing pages to powerful e-commerce websites, we transform your ideas into modern digital experiences.</p><div className="hero-buttons"><PrimaryButton>Start your project</PrimaryButton><SecondaryButton href="/portfolio">Explore our portfolio</SecondaryButton></div><div className="hero-assurances"><span><Check size={14} />Thoughtful design</span><span><Check size={14} />Clean development</span><span><Check size={14} />Built around you</span></div></div><div className="hero-art"><div className="hero-art-label"><span className="small-cross">+</span><span>IDEAS INTO EXPERIENCES</span><span>01 / ∞</span></div><div className="hero-desktop"><div className="browser-bar"><div className="browser-dots"><i /><i /><i /></div><span><LockKeyhole size={10} /> Your next big idea, online.</span><ArrowUpRight size={13} /></div><SiteImage src={siteImages.hero} alt="A sunlit desk with a desktop computer and design workspace — stock visual placeholder" sizes="(max-width: 767px) 85vw, (max-width: 1200px) 44vw, 600px" priority /><div className="hero-image-copy"><span>DESIGNED WITH INTENTION.</span><strong>A space for<br />your next big idea.</strong></div></div><div className="hero-mobile"><div className="phone-speaker" /><SiteImage src={siteImages.mobile} alt="Minimal smartphone product photograph — stock visual placeholder" sizes="(max-width: 479px) 85px, (max-width: 767px) 110px, (max-width: 1023px) 94px, (max-width: 1200px) 110px, 128px" /><span>Small screen.<br /><strong>Big possibilities.</strong></span><div className="phone-home" /></div><div className="hero-dashboard"><div className="mini-browser"><span /><span /><span /></div><SiteImage src={siteImages.dashboard} alt="Analytics on a computer screen — stock visual placeholder" sizes="(max-width: 479px) 120px, (max-width: 767px) 155px, (max-width: 1023px) 125px, (max-width: 1200px) 155px, 175px" /></div><div className="hero-code-label"><span><Code2 size={17} /></span><div>Beautiful on the outside.<br /><strong>Powerful underneath.</strong></div><ArrowUpRight size={18} /></div><p className="hero-image-disclaimer">Visual direction · stock image placeholders</p></div></div><div className="hero-bottom"><span>Good design is good business.</span><a href="#selected-work">Discover what’s possible <ArrowDown size={15} /></a><span className="hero-bottom-right">DESIGN. DEVELOP. MAKE A DIFFERENCE.</span></div></Container></section>;
+  return (
+    <section className="sales-hero">
+      <Container>
+        <div className="sales-hero-grid">
+          <div className="sales-hero-copy">
+            <span className="offer-pill"><Sparkles size={15} /> Limited launch offer</span>
+            <h1>Landing page that turns <span>clicks into customers.</span></h1>
+            <p>Modern UI/UX, fast loading and Facebook Pixel setup—everything you need to start selling online.</p>
+            <div className="hero-price"><strong>৳2,500</strong><span>Landing Page + Pixel Setup</span></div>
+            <div className="hero-buttons">
+              <PrimaryButton href="/contact?service=Landing%20Page">Get started for ৳2,500</PrimaryButton>
+              <a className="plain-link" href="#offer">See what&apos;s included <ArrowUpRight size={17} /></a>
+            </div>
+            <div className="sales-trust">
+              <span><Check size={15} /> Mobile responsive</span>
+              <span><Check size={15} /> Conversion focused</span>
+              <span><Check size={15} /> Pixel ready</span>
+            </div>
+          </div>
+          <div className="sales-hero-visual">
+            <SiteImage
+              src="/images/landing-page-ui-hero.png"
+              alt="Modern landing page UI and UX shown on desktop and mobile screens"
+              sizes="(max-width: 767px) calc(100vw - 40px), 52vw"
+              priority
+            />
+            <span className="visual-badge"><span>●</span> Designed to convert</span>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
 }
