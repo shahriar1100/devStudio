@@ -1,4 +1,4 @@
-import { hasBlobStore, isAuthorized, json } from "../server/admin.js";
+import { defaultAdminPassword, hasBlobStore, isAuthorized, json } from "../server/admin.js";
 
 export default {
   async fetch(request) {
@@ -7,7 +7,7 @@ export default {
     return json({
       authenticated: true,
       storage: hasBlobStore() ? "ready" : "not-configured",
-      usingDefaultPassword: !process.env.ADMIN_PASSWORD
+      usingDefaultPassword: !process.env.ADMIN_PASSWORD || request.headers.get("authorization") === `Bearer ${defaultAdminPassword}`
     });
   }
 };

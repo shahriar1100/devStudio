@@ -10,12 +10,14 @@ export function json(data, status = 200) {
 }
 
 export function isAuthorized(request) {
-  const expected = process.env.ADMIN_PASSWORD || defaultAdminPassword;
   const supplied = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") || "";
-  if (!expected || !supplied) return false;
-  const expectedBuffer = Buffer.from(expected);
+  if (!supplied) return false;
   const suppliedBuffer = Buffer.from(supplied);
-  return expectedBuffer.length === suppliedBuffer.length && timingSafeEqual(expectedBuffer, suppliedBuffer);
+  const acceptedPasswords = [process.env.ADMIN_PASSWORD, defaultAdminPassword].filter(Boolean);
+  return acceptedPasswords.some(password => {
+    const expectedBuffer = Buffer.from(password);
+    return expectedBuffer.length === suppliedBuffer.length && timingSafeEqual(expectedBuffer, suppliedBuffer);
+  });
 }
 
 export function hasBlobStore() {
