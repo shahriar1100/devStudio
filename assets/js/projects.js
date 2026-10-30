@@ -1,33 +1,32 @@
 window.PORTFOLIO_PROJECTS = [
   {
-    title: "Fintech App",
-    category: "UI Design",
-    image: "assets/images/work/work-01.svg",
-    alt: "Fintech mobile app interface preview"
+    title: "Fashion Store",
+    category: "E-commerce UI/UX",
+    image: "assets/images/work/ecommerce-fashion.png",
+    alt: "Fashion e-commerce website interface with product collections"
   },
   {
-    title: "Creative Studio",
-    category: "Website Mockup",
-    image: "assets/images/work/work-02.svg",
-    alt: "Creative studio website mockup"
+    title: "Tech Store",
+    category: "E-commerce UI/UX",
+    image: "assets/images/work/ecommerce-electronics.png",
+    alt: "Electronics e-commerce website interface with product comparison"
   },
   {
-    title: "Music Player",
-    category: "Product Design",
-    image: "assets/images/work/work-03.svg",
-    alt: "Music player mobile interface"
+    title: "Fresh Market",
+    category: "Grocery E-commerce",
+    image: "assets/images/work/ecommerce-grocery.png",
+    alt: "Grocery delivery website interface with shopping cart"
   },
   {
-    title: "Brand System",
-    category: "Branding",
-    image: "assets/images/work/work-04.svg",
-    alt: "Brand identity presentation"
+    title: "Beauty Shop",
+    category: "E-commerce UI/UX",
+    image: "assets/images/work/ecommerce-beauty.png",
+    alt: "Skincare e-commerce website interface with cart and wishlist"
   },
   {
-    title: "Commerce Flow",
-    category: "UX/UI Design",
-    image: "assets/images/work/work-05.svg",
-    alt: "Mobile commerce interface"
+    title: "Modern Living",
+    category: "Furniture E-commerce",
+    image: "assets/images/work/ecommerce-furniture.png",
+    alt: "Furniture e-commerce website interface with categories and filters"
   }
 ];
-
