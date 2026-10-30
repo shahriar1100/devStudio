@@ -713,13 +713,10 @@ svg { flex-shrink:0; }
 .agency-service-grid p { margin-top:10px; color:var(--muted); line-height:1.6; }
 .agency-service-grid .text-link { align-self:flex-start; margin-top:auto; padding-top:22px; font-size:var(--text-small); }
 .agency-offer { padding:68px 0; color:#fff; background:linear-gradient(120deg,#0b1a36,#15386f); }
-.agency-offer>.container { display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:60px; }
+.agency-offer>.container { display:grid; grid-template-columns:1fr auto; align-items:center; gap:60px; }
 .agency-offer-copy>span { color:#8fb8ff; font-size:var(--text-caption); font-weight:700; letter-spacing:1.5px; }
 .agency-offer-copy h2 { margin-top:7px; font-size:clamp(28px,3.5vw,45px); letter-spacing:-1.8px; }
 .agency-offer-copy p { margin-top:6px; color:#aebed8; }
-.agency-offer-price { display:flex; flex-direction:column; padding-left:45px; border-left:1px solid #ffffff2b; }
-.agency-offer-price span { color:#9fb0cb; font-size:var(--text-small); }
-.agency-offer-price strong { font-family:var(--font-space),Arial,sans-serif; font-size:43px; line-height:1.1; }
 .agency-contact-section { background:var(--bg); }
 .agency-contact-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; align-items:start; }
 .agency-reasons { padding-top:18px; }
@@ -755,7 +752,6 @@ svg { flex-shrink:0; }
   .agency-services-intro { display:block; }
   .agency-services-intro .section-heading { margin-bottom:28px; }
   .agency-offer>.container { grid-template-columns:1fr; gap:27px; }
-  .agency-offer-price { padding:0; border-left:0; }
   .agency-offer .button { width:100%; justify-content:space-between; }
   .agency-contact-grid { gap:38px; }
 }

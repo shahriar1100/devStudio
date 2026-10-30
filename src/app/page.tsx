@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "Web Design Agency — Landing Page + Pixel Setup",
-  "Dev Studio creates modern, conversion-focused landing pages. Get a landing page with Facebook Pixel setup for ৳2,500.",
+  "Dev Studio creates modern, conversion-focused landing pages with Facebook Pixel setup.",
   "/",
 );
 
@@ -83,7 +83,6 @@ export default function HomePage() {
             <h2>Landing Page + Pixel Setup</h2>
             <p>Everything you need to launch a focused campaign.</p>
           </div>
-          <div className="agency-offer-price"><span>Only</span><strong>৳2,500</strong></div>
           <PrimaryButton href="/contact?service=Landing%20Page">Book this offer</PrimaryButton>
         </Container>
       </section>

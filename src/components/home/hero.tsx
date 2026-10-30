@@ -13,7 +13,7 @@ export function Hero() {
             <h1>Build a better<br /><span>online presence.</span></h1>
             <p>Clean landing pages designed to turn visitors into customers—without unnecessary complexity.</p>
             <div className="agency-hero-actions">
-              <PrimaryButton href="/contact?service=Landing%20Page">Start for ৳2,500</PrimaryButton>
+              <PrimaryButton href="/contact?service=Landing%20Page">Get started</PrimaryButton>
               <a href="#services">Explore services <ArrowDown size={17} /></a>
             </div>
             <div className="agency-proof">
@@ -29,7 +29,7 @@ export function Hero() {
               sizes="(max-width: 767px) calc(100vw - 40px), 48vw"
               priority
             />
-            <div className="agency-floating-card"><span>Launch offer</span><strong>৳2,500</strong><small>Landing Page + Pixel</small></div>
+            <div className="agency-floating-card"><span>Launch offer</span><strong>Now booking</strong><small>Landing Page + Pixel</small></div>
             <span className="agency-preview-tag">Designed to convert <ArrowUpRight size={14} /></span>
           </div>
         </div>
