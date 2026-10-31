@@ -1,14 +1,10 @@
 {
-  "name": "shahriar-portfolio",
+  "name": "dev-studio-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
-    "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs"
-  },
-  "dependencies": {
-    "@vercel/blob": "2.4.0"
   }
 }
